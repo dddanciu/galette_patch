@@ -1,0 +1,41 @@
+From 4b310deac7422e9e7fcc60390d313539b1ba0a72 Mon Sep 17 00:00:00 2001
+From: Daniela <danciu.daniela@yahoo.com>
+Date: Sun, 2 Mar 2014 22:38:25 +0100
+Subject: [PATCH] Checkbox added
+
+---
+ galette/templates/default/gestion_adherents.tpl |    7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/galette/templates/default/gestion_adherents.tpl b/galette/templates/default/gestion_adherents.tpl
+index e47dcf1..1ca1154 100644
+--- a/galette/templates/default/gestion_adherents.tpl
++++ b/galette/templates/default/gestion_adherents.tpl
+@@ -61,6 +61,7 @@
+                 <tr>
+                     <th class="id_row">#</th>
+                     <th class="left">
++                        <input type="checkbox" id="check_name" />
+                         <a href="gestion_adherents.php?tri={php}echo Galette\Repository\Members::ORDERBY_NAME;{/php}">
+                             {_T string="Name"}
+                             {if $filters->orderby eq constant('galette\Repository\Members::ORDERBY_NAME')}
+@@ -272,12 +273,14 @@
+ {if $nb_members != 0}
+         var _is_checked = true;
+         var _bind_check = function(){
+-            $('#checkall').click(function(){
++            $('#checkall, #check_name').click(function(){
+                 $('table.listing :checkbox[name="member_sel[]"]').each(function(){
+                     this.checked = _is_checked;
+                 });
++                if( $(this)[0] == $('#checkall')[0] ) {
++                    $('#check_name').attr("checked", _is_checked);
++                }
+                 _is_checked = !_is_checked;
+-                return false;
+             });
+             $('#checkinvert').click(function(){
+                 $('table.listing :checkbox[name="member_sel[]"]').each(function(){
+-- 
+1.7.10.4
+
